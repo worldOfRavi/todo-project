@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class=" container navbar navbar-expand-lg navbar-light bg-light">
+        <div class="nx-5 container-fluid">
+          <a class="navbar-brand" href="#">Test 3</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="d-flex flex-row ">
+                <a class="nav-link" href="/">Register</a>
+                <a class="nav-link" href="/login"> Login</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">Login</div>
+          <div class="card-body">
+            <form id="login-form">
+              <div class="mb-3">
+                <label for="login-username" class="form-label">Username:</label>
+                <input type="text" class="form-control" id="login-username" required>
+              </div>
+              <div class="mb-3">
+                <label for="login-password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="login-password" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./javascripts/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Item</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">Edit Item</div>
+          <div class="card-body">
+            <form id="edit-item-form">
+              <input type="hidden" id="edit-item-id">
+              <div class="mb-3">
+                <label for="edit-item-title" class="form-label">Title:</label>
+                <input type="text" class="form-control" id="edit-item-title" required>
+              </div>
+              <div class="mb-3">
+                <label for="edit-item-description" class="form-label">Description:</label>
+                <textarea class="form-control" id="edit-item-description" required></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="item-priority" class="form-label">Priority:</label>
+                <input class="form-control" id="edit-item-priority" type="text" required/>
+              </div>
+              <div class="mb-3">
+                <label for="item-dueDate" class="form-label">Due Date:</label>
+                <input class="form-control" id="edit-item-dueDate" type="date" required/>
+              </div>
+              <div class="mb-3">
+                <label for="item-status" class="form-label">Status:</label>
+                <input class="form-control" id="edit-item-status" required/>
+              </div>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./javascripts/updateItem.js"></script>
+</body>
+</html>

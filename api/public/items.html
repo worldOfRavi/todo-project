@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Items</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class=" container navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Test 3</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <!-- Other navbar items -->
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="btn btn-danger" href="#" onclick="signOut()">Sign Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+  <div class="container mt-5">
+   
+    <div class="row justify-content-center mt-3">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">Create Item</div>
+          <div class="card-body">
+            <form id="create-item-form">
+              <div class="mb-3">
+                <label for="item-title" class="form-label">Title:</label>
+                <input type="text" class="form-control" id="item-title" required>
+              </div>
+              <div class="mb-3">
+                <label for="item-description" class="form-label">Description:</label>
+                <textarea class="form-control" id="item-description" required></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="item-priority" class="form-label">Priority:</label>
+                <input class="form-control" id="item-priority" type="text" required/>
+              </div>
+              <div class="mb-3">
+                <label for="item-dueDate" class="form-label">Due Date:</label>
+                <input class="form-control" id="item-dueDate" type="date" required/>
+              </div>
+              <div class="mb-3">
+                <label for="item-status" class="form-label">Status:</label>
+                <input class="form-control" id="item-status" required/>
+              </div>
+              <button type="submit" class="btn btn-primary">Create Item</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+<br>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">Items</div>
+            <div class="card-body">
+              <ul id="items-list" class="list-group">
+                <!-- Items will be dynamically added here -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+ <!-- Edit Item Modal -->
+<div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="edit-item-form">
+            <input type="hidden" id="edit-item-id">
+            <div class="mb-3">
+              <label for="edit-item-title" class="form-label">Title:</label>
+              <input type="text" class="form-control" id="edit-item-title" required>
+            </div>
+            <div class="mb-3">
+              <label for="edit-item-description" class="form-label">Description:</label>
+              <textarea class="form-control" id="edit-item-description" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="item-priority" class="form-label">Priority:</label>
+              <input class="form-control" id="edit-item-priority" type="text" required/>
+            </div>
+            <div class="mb-3">
+              <label for="item-dueDate" class="form-label">Due Date:</label>
+              <input class="form-control" id="edit-item-dueDate" type="date" required/>
+            </div>
+            <div class="mb-3">
+              <label for="item-status" class="form-label">Status:</label>
+              <input class="form-control" id="edit-item-status" required/>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./javascripts/items.js"></script>
+</body>
+</html>
