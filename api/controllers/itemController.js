@@ -27,6 +27,7 @@ exports.getItems = async (req, res) => {
 exports.getItemById = async (req, res) => {
     try {
       const id = req.params.id;
+      console.log(id);
       const item = await Item.findOne({ _id: id });
       if (!item) {
         return res.status(404).json({ message: 'Item not found' });
@@ -39,8 +40,9 @@ exports.getItemById = async (req, res) => {
 
 exports.updateItem = async (req, res) => {
   try {
+    const id = req.params.id;
     const item = await Item.findOneAndUpdate(
-      { _id: req.params.id, user: req.user.id },
+      {_id:id },
       req.body,
       { new: true }
     );

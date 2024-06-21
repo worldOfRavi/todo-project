@@ -1,13 +1,15 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../store/useContext";
 import TodoList from "./TodoList";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { todoList } = useAuthContext();
-
+  const { todoList, getTodoList } = useAuthContext();
+  useEffect(()=>{
+    getTodoList();
+  },[])
   const handleClick = () => {
     navigate("/create");
   };
@@ -53,11 +55,34 @@ const Home = () => {
         </div>
 
         <div className="taskboard p-10 pt-0 flex flex-row justify-start gap-3 flex-wrap w-full">
-          {/* card goes here */}
-
-          {todoList.map((todo, idx) => (
-            <TodoList key={idx} todo={todo} />
-          ))}
+          <div className="flex-1">
+            <TodoList
+              todo={todoList.filter((list) => list?.status === "Todo")}
+              status="ToDo"
+              priority={todoList.priority}
+            />
+          </div>
+          <div className="flex-1">
+            <TodoList
+              todo={todoList.filter((list) => list?.status === "In Progress")}
+              status="In Progress"
+              priority={todoList.priority}
+            />
+          </div>
+          <div className="flex-1">
+            <TodoList
+              todo={todoList.filter((list) => list?.status === "In Review")}
+              status="In Review"
+              priority={todoList.priority}
+            />
+          </div>
+          <div className="flex-1">
+            <TodoList
+              todo={todoList.filter((list) => list?.status === "Completed")}
+              status="Completed"
+              priority={todoList.priority}
+            />
+          </div>
         </div>
       </div>
       {/* <TodoList /> */}
