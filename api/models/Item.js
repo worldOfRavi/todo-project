@@ -12,11 +12,6 @@ const itemSchema = new mongoose.Schema({
   },
   priority:{
     type:String,
-    enum:[
-      "High",
-      "Mid",
-      "Low",
-    ],
     required:true
   },
   dueDate:{
@@ -25,18 +20,7 @@ const itemSchema = new mongoose.Schema({
   },
   status:{
     type:String,
-    enum:[
-      "Todo",
-      "InProgress",
-      "InReview",
-      "Completed"
-    ],
     required:true
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
   },
 },{timestamps:true});
 

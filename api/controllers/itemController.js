@@ -3,8 +3,7 @@ const User = require('../models/User');
 
 exports.createItem = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
-    const newItem = new Item({ ...req.body, user: user._id });
+    const newItem = new Item({ ...req.body });
     await newItem.save();
     res.status(201).json(newItem);
   } catch (error) {
@@ -15,8 +14,11 @@ exports.createItem = async (req, res) => {
 
 exports.getItems = async (req, res) => {
   try {
-    const items = await Item.find({ user: req.user.id });
-    res.json(items);
+    const items = await Item.find();
+    if(!items){
+      return res.status(400).json({error:"cannot fetch the todo items"})
+    }
+    res.status(201).json({items})
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving items', error });
   }
