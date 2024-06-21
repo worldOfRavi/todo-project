@@ -1,25 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import useLogin from "../hooks/useLogin";
-import { Link, useNavigate } from 'react-router-dom';
-
-
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-    const {loading, login} = useLogin();
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+  const { loading, login } = useLogin();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    const handleSubmit = async(e)=>{
-        e.preventDefault();
-        await login({username, password});
-        navigate("/");
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await login({ username, password });
+    navigate("/");
+  };
   return (
-    <>
-      <div className="form-container">
-        <h1 className="">Login</h1>
-        <form onSubmit={handleSubmit}>
+    <div className="form-container w-[80%] lg:max-w-[40%] md:max-w-[60%] sm:w-[50%] rounded-md border-2 shadow-sm r mx-auto mt-[20vh] p-6  ">
+      <h1 className="text-3xl mb-4">Login</h1>
+      <form className="flex flex-col gap-4 flex-wrap p-8" onSubmit={handleSubmit}>
         <label className="input input-bordered flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +26,14 @@ const Login = () => {
           >
             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
           </svg>
-          <input type="text" className="grow" placeholder="Username" required value={username} onChange={(e)=>setUsername(e.target.value)} />
+          <input
+            type="text"
+            className="grow "
+            placeholder="Username"
+            required
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </label>
         <label className="input input-bordered flex items-center gap-2">
           <svg
@@ -44,13 +48,19 @@ const Login = () => {
               clipRule="evenodd"
             />
           </svg>
-          <input type="password" className="grow" placeholder="password" required value={password} onChange={(e)=>setPassword(e.target.value)} />
+          <input
+            type="password"
+            className="grow"
+            placeholder="password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </label>
-        <Link to={"/register"} >Don't have account?</Link> <br />
+        <Link to={"/register"}>Don't have account?</Link>
         <button className="btn">login</button>
       </form>
-      </div>
-    </>
+    </div>
   );
 };
 

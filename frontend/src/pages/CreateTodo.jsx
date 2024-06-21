@@ -27,10 +27,11 @@ const CreateTodo = () => {
   };
 
   return (
-    <div className="create-container">
-      <h1 className="text-gray-700">Create todo</h1>
-      <form onSubmit={handleSubmit}>
-        <label className="form-control w-full max-w-xs">
+    <>
+      <h1 className="text-gray-700 text-3xl text-center mt-10">Create New Task</h1>
+    <div className="create-container w-[80%] lg:max-w-[40%] md:max-w-[60%] sm:w-[50%] rounded-md border-2 shadow-sm r mx-auto mt-[4vh] p-2">
+      <form className="flex flex-col gap-4 flex-wrap p-8 justify-center w-[100%] items-center" onSubmit={handleSubmit}>
+        <label className="form-control w-full max-w-xs ">
           <div className="label">
             <span className="label-text">Title</span>
           </div>
@@ -103,11 +104,12 @@ const CreateTodo = () => {
           <option value="completed">Completed</option>
         </select>
         <br />
-        <button type="submit" className="btn">
+        <button type="submit" className="btn w-full max-w-xs">
           Create
         </button>
       </form>
     </div>
+    </>
   );
 };
 

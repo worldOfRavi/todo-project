@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import useRegister from "../hooks/useRegister";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
@@ -15,9 +15,9 @@ const Register = () => {
     }
   return (
     <>
-      <div className="form-container">
-        <h1 className="">Register</h1>
-        <form onSubmit={handleSubmit}>
+    <div className="form-container w-[80%] lg:max-w-[40%] md:max-w-[60%] sm:w-[50%] rounded-md border-2 shadow-sm r mx-auto mt-[20vh] p-6  ">
+    <h1 className="text-3xl mb-4">Register</h1>
+        <form className="flex flex-col gap-4 flex-wrap p-8" onSubmit={handleSubmit}>
         <label className="input input-bordered flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@ const Register = () => {
           </svg>
           <input type="password" className="grow" placeholder="password" required value={password} onChange={(e)=>setPassword(e.target.value)} />
         </label>
-        <Link to={"/login"}>Already have an account?</Link> <br />
+        <Link to={"/login"}>Already have an account?</Link>
         <button className="btn">Register</button>
       </form>
       </div>
