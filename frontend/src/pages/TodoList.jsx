@@ -7,8 +7,9 @@ import { extractTime } from "../utils/extractTime";
 import useDeleteTodo from "../hooks/useDeleteTodo";
 import { useNavigate } from "react-router-dom";
 import useGetOneTodo from "../hooks/useGetOneTodo";
+import { PiClockCountdownFill } from "react-icons/pi";
 
-const TodoList = ({ todo, status }) => {
+const TodoList = ({ todo, status, priority }) => {
   console.log("--ToDo--", todo);
   const navigate = useNavigate();
 
@@ -28,21 +29,37 @@ const TodoList = ({ todo, status }) => {
   };
   getBorderColor(status);
 
+  let bgColor = "";
+
+  const priorityColor = () => {
+    if (priority == "high") {
+      bgColor = "bg-red-800";
+    } else if (priority == "medium") {
+      bgColor = "bg-red-300";
+    } else {
+      bgColor = "bg-red-100";
+    }
+  };
+
+  priorityColor(priority);
+
   const editTodo = (id) => {
     navigate("/update/" + id);
   };
   return (
-    <div className={`p-5 bg-base-200 rounded-md border-t-4 ${topBorderColor}`}>
+    <div className={`p-5 bg-base-200 rounded-md border-t-8 ${topBorderColor}`}>
       <div className=" title text-xl font-medium m-2">{status}</div>
       <div className="content ">
-        <div className="card bg-base-100 shadow-xl self-center flex flex-col gap-4">
+        <div className="card shadow-xl self-center flex flex-col gap-4">
           {todo.length === 0 ? (
             <h1 className="text-center"> No Data</h1>
           ) : (
             todo.map((item) => {
               return (
                 <div className="task  bg-slate-300 rounded-md p-4 text-slate-900">
-                  <span className="bg-red-400 text-center py-1 px-4 rounded-lg  ">
+                  <span
+                    className={`${bgColor} text-center py-1 px-4 rounded-lg  `}
+                  >
                     {item.priority}
                   </span>
                   <p className="task-title text-xl my-2  p-2 ">{item.title}</p>
@@ -50,15 +67,15 @@ const TodoList = ({ todo, status }) => {
                     {item.description}
                   </p>
 
-                  <div className="flex flex-row justify-between">
-                    <div className="flex flex-row justify-start gap-6">
-                      <p className="text-xl">
+                  <div className="flex flex-row justify-between items-center">
+                    <div className="text-xl flex flex-row justify-center gap-6">
+                      <p className=" self-center">
                         <CiEdit
                           className=" cursor-pointer"
                           onClick={() => editTodo(item._id)}
                         />
                       </p>
-                      <p className="text-xl">
+                      <p className="self-center">
                         {loading ? (
                           <span className="loading loading-spinner"></span>
                         ) : (
@@ -68,7 +85,10 @@ const TodoList = ({ todo, status }) => {
                           />
                         )}
                       </p>
-                      <p className="text-l">
+                    </div>
+                    <div className="text-xl flex gap-4 items-center justify-end">
+                      <PiClockCountdownFill />
+                      <p className="text-lg self-center">
                         {new Date(item.dueDate).toDateString()}
                       </p>
                     </div>

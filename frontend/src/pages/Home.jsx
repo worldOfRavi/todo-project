@@ -58,24 +58,28 @@ const Home = () => {
             <TodoList
               todo={todoList.filter((list) => list?.status === "Todo")}
               status="ToDo"
+              priority={todoList.priority}
             />
           </div>
           <div className="flex-1">
             <TodoList
               todo={todoList.filter((list) => list?.status === "In Progress")}
               status="In Progress"
+              priority={todoList.priority}
             />
           </div>
           <div className="flex-1">
             <TodoList
               todo={todoList.filter((list) => list?.status === "In Review")}
               status="In Review"
+              priority={todoList.priority}
             />
           </div>
           <div className="flex-1">
             <TodoList
               todo={todoList.filter((list) => list?.status === "Completed")}
               status="Completed"
+              priority={todoList.priority}
             />
           </div>
         </div>
