@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import useCreateTodo from "../hooks/useCreateTodo";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetOneTodo from "../hooks/useGetOneTodo";
+import useUpdateTodo from "../hooks/useUpdateTodo";
 
 const UpdateTodo = () => {
+ const {loading, UpdateTodo} =  useUpdateTodo();
     const {id} = useParams();
     const {item,getOneTodo} = useGetOneTodo();
 
@@ -13,7 +15,6 @@ const UpdateTodo = () => {
     },[])
   const navigate =  useNavigate();
 
-   const {loading, create} =  useCreateTodo();
   const [input, setInput] = useState({
     title: item.title,
     description: item.description,
