@@ -7,6 +7,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 const Home = () => {
   const navigate = useNavigate();
   const { todoList } = useAuthContext();
+  console.log("Array--", todoList);
 
   const handleClick = () => {
     navigate("/create");
@@ -53,11 +54,30 @@ const Home = () => {
         </div>
 
         <div className="taskboard p-10 pt-0 flex flex-row justify-start gap-3 flex-wrap w-full">
-          {/* card goes here */}
-
-          {todoList.map((todo, idx) => (
-            <TodoList key={idx} todo={todo} />
-          ))}
+          <div className="flex-1">
+            <TodoList
+              todo={todoList.filter((list) => list?.status === "Todo")}
+              status="ToDo"
+            />
+          </div>
+          <div className="flex-1">
+            <TodoList
+              todo={todoList.filter((list) => list?.status === "In Progress")}
+              status="In Progress"
+            />
+          </div>
+          <div className="flex-1">
+            <TodoList
+              todo={todoList.filter((list) => list?.status === "In Review")}
+              status="In Review"
+            />
+          </div>
+          <div className="flex-1">
+            <TodoList
+              todo={todoList.filter((list) => list?.status === "Completed")}
+              status="Completed"
+            />
+          </div>
         </div>
       </div>
       {/* <TodoList /> */}
