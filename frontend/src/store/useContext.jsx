@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
 
-export const AuthContextProvider = ({children}) => {
+    export const AuthContextProvider = ({children}) => {
     const [authUser, setAuthUser] = useState(localStorage.getItem('auth') || "");
     const [todoList, setTodoList] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(!!authUser);
