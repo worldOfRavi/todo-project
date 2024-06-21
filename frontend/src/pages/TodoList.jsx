@@ -16,32 +16,29 @@ const TodoList = ({ todo, status, priority }) => {
   const { loading, deleteTodo } = useDeleteTodo();
   let topBorderColor = "";
   let getBorderColor = () => {
-    if (status === "Todo") {
-      topBorderColor = "border-t-red-500";
+    if (status === "ToDo") {
+      topBorderColor = "border-t-red-700";
     } else if (status === "In Progress") {
       topBorderColor = "border-t-blue-500";
     } else if (status === "In Review") {
       topBorderColor = "border-t-yellow-500";
-    } else {
+    } else if(status === "Completed"){
       topBorderColor = "border-t-green-500";
     }
     return topBorderColor;
   };
   getBorderColor(status);
 
-  let bgColor = "";
-
-  const priorityColor = () => {
+  const priorityColor = (priority) => {
     if (priority == "high") {
-      bgColor = "bg-red-800";
+      return "bg-red-800";
     } else if (priority == "medium") {
-      bgColor = "bg-red-300";
+      return "bg-red-300";
     } else {
-      bgColor = "bg-red-100";
+      return "bg-red-100";
     }
   };
 
-  priorityColor(priority);
 
   const editTodo = (id) => {
     navigate("/update/" + id);
@@ -58,7 +55,7 @@ const TodoList = ({ todo, status, priority }) => {
               return (
                 <div className="task  bg-slate-300 rounded-md p-4 text-slate-900">
                   <span
-                    className={`${bgColor} text-center py-1 px-4 rounded-lg  `}
+                    className={`${priorityColor(item.priority)} text-center py-1 px-4 rounded-lg  `}
                   >
                     {item.priority}
                   </span>

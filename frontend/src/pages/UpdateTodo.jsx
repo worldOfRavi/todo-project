@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
-import useCreateTodo from "../hooks/useCreateTodo";
+import  {  useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useGetOneTodo from "../hooks/useGetOneTodo";
 import useUpdateTodo from "../hooks/useUpdateTodo";
+import { useAuthContext } from "../store/useContext";
 
 const UpdateTodo = () => {
- const {loading, UpdateTodo} =  useUpdateTodo();
-    const {id} = useParams();
-    const {item,getOneTodo} = useGetOneTodo();
-
-    console.log(item);
-    useEffect(()=>{
-        getOneTodo(id);
-    },[])
+ const { updateTodo} =  useUpdateTodo();
+ const {id} = useParams();
+const {todoList} =  useAuthContext();
+let item = todoList.find((elm)=>
+  elm._id == id
+)
   const navigate =  useNavigate();
 
   const [input, setInput] = useState({
@@ -35,7 +32,7 @@ const UpdateTodo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    create(input);
+    updateTodo(input,id);
     navigate("/");
 
   };

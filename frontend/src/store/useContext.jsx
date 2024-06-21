@@ -29,10 +29,6 @@ export const AuthContext = createContext();
         }
     };
 
-    useEffect(() => {
-        getTodoList();
-    }, []);
-
     return (
         <AuthContext.Provider value={{ authUser, setAuthUser, storeINLS, logoutUser, todoList, getTodoList, isLoggedIn, setIsLoggedIn }}>
             {children}

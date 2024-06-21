@@ -1,14 +1,15 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../store/useContext";
 import TodoList from "./TodoList";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { todoList } = useAuthContext();
-  console.log("Array--", todoList);
-
+  const { todoList, getTodoList } = useAuthContext();
+  useEffect(()=>{
+    getTodoList();
+  },[])
   const handleClick = () => {
     navigate("/create");
   };

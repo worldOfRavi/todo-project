@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../store/useContext";
+import { CiUser } from "react-icons/ci";
+
 
 const Navbar = () => {
   const {isLoggedIn,setIsLoggedIn} = useAuthContext();
@@ -29,10 +31,10 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
+               {authUser ? (<img
                   alt="Tailwind CSS Navbar component"
                   src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                />
+                />):(<CiUser className="text-4xl"/>) } 
               </div>
             </div>
             <ul
