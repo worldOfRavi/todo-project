@@ -3,8 +3,7 @@ const User = require('../models/User');
 
 exports.createItem = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
-    const newItem = new Item({ ...req.body, user: user._id });
+    const newItem = new Item({ ...req.body });
     await newItem.save();
     res.status(201).json(newItem);
   } catch (error) {
@@ -15,8 +14,11 @@ exports.createItem = async (req, res) => {
 
 exports.getItems = async (req, res) => {
   try {
-    const items = await Item.find({ user: req.user.id });
-    res.json(items);
+    const items = await Item.find();
+    if(!items){
+      return res.status(400).json({error:"cannot fetch the todo items"})
+    }
+    res.status(201).json({items})
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving items', error });
   }
@@ -24,11 +26,12 @@ exports.getItems = async (req, res) => {
 
 exports.getItemById = async (req, res) => {
     try {
-      const item = await Item.findOne({ _id: req.params.id, user: req.user.id });
+      const id = req.params.id;
+      const item = await Item.findOne({ _id: id });
       if (!item) {
         return res.status(404).json({ message: 'Item not found' });
       }
-      res.json(item);
+      res.status(201).json({item});
     } catch (error) {
       res.status(500).json({ message: 'Error fetching item', error });
     }
@@ -52,10 +55,8 @@ exports.updateItem = async (req, res) => {
 
 exports.deleteItem = async (req, res) => {
   try {
-    const item = await Item.findOneAndDelete({
-      _id: req.params.id,
-      user: req.user.id,
-    });
+    const id = req.params.id;
+    const item = await Item.findByIdAndDelete({_id:id});
     if (!item) {
       return res.status(404).json({ message: 'Item not found' });
     }
