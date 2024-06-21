@@ -1,41 +1,45 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-export const authContext = createContext();
+export const AuthContext = createContext();
 
-export const AuthContextProvider = ({children})=>{
-    const [authUser, setAuthUser] = useState("");
-    const [todoList, setTodoList] = useState({});
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+export const AuthContextProvider = ({children}) => {
+    const [authUser, setAuthUser] = useState(localStorage.getItem('auth') || "");
+    const [todoList, setTodoList] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(!!authUser);
 
-    const storeINLS = (id)=>{
-        // console.log(token);
+    const storeINLS = (id) => {
         setAuthUser(id);
-        localStorage.setItem('auth', id);;
-    }
+        localStorage.setItem('auth', id);
+        setIsLoggedIn(true);
+    };
 
+    const logoutUser = () => {
+        setAuthUser("");
+        localStorage.removeItem('auth');
+        setIsLoggedIn(false);
+    };
 
-       // function for handling logout functionality
-    const logoutUser = ()=>{
-        setAuthUser("")
-        return localStorage.removeItem('auth');
-    }
+    const getTodoList = async () => {
+        try {
+            const res = await fetch("http://localhost:3000/api/items");
+            const data = await res.json();
+            setTodoList(data.items);
+        } catch (error) {
+            console.error("Failed to fetch todo list", error);
+        }
+    };
 
-    const getTodoList = async()=>{
-        const res = await fetch("http://localhost:3000/api/items");
-        const data = await res.json();
-        setTodoList(data.items)
-    }
-    useEffect(()=>{
+    useEffect(() => {
         getTodoList();
-    },[])
+    }, []);
 
-    return(
-        <authContext.Provider value={{authUser, setAuthUser, storeINLS,logoutUser,todoList,getTodoList,isLoggedIn,setIsLoggedIn }}>
+    return (
+        <AuthContext.Provider value={{ authUser, setAuthUser, storeINLS, logoutUser, todoList, getTodoList, isLoggedIn, setIsLoggedIn }}>
             {children}
-        </authContext.Provider>
-    )
-}
+        </AuthContext.Provider>
+    );
+};
 
-export const useAuthContext = ()=>{
-    return useContext(authContext)
-}
+export const useAuthContext = () => {
+    return useContext(AuthContext);
+};
