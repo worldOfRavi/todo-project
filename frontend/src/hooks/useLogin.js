@@ -18,8 +18,8 @@ const useLogin = () => {
             body:JSON.stringify({username, password})
         })
         const data = await res.json();
-        console.log(data);
-        storeINLS(data.token);
+        // console.log(data);
+        storeINLS(data.id);
         if(data.error) throw new Error(data.error);
         if(res.ok){
             toast.success("Login successfull"); 

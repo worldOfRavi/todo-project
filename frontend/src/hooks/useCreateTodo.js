@@ -1,9 +1,11 @@
 
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
+import { useAuthContext } from '../store/useContext';
 
 
 const useCreateTodo = () => {
+    const {getTodoList} = useAuthContext();
   const [loading, setLaoding] = useState(false);
   
   const create = async(input)=>{
@@ -20,6 +22,7 @@ const useCreateTodo = () => {
         const data = await res.json();
         if(data.error) throw new Error(data.error);
         if(res.ok){
+            getTodoList();
             toast.success("Todo creation successful");
         }
         else{

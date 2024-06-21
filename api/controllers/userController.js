@@ -47,8 +47,23 @@ exports.login = async (req, res) => {
       expiresIn: '15d',
     });
 
-    res.json({ token });
+    res.json({ id:user._id });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in', error });
   }
 };
+
+exports.getOneUser = async(req, res)=>{
+  try {
+    const id = req.params.id;
+    const  user = User.findOne({_id:id});
+    if(!user){
+      res.status(404).json({message:"User not found"})
+    }
+    res.status(201).json({id:user.Id});
+    
+  } catch (error) {
+    console.log(("Error in getOneUser controller", error.message));
+    res.status(500).json({error:"Internal server error"})
+  }
+}

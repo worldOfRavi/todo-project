@@ -7,6 +7,7 @@ import Logout from './pages/Logout'
 import Home from './pages/Home'
 import { useAuthContext } from './store/useContext'
 import CreateTodo from './pages/CreateTodo'
+import UpdateTodo from './pages/UpdateTodo'
 
 const App = () => {
   const {authUser} = useAuthContext();
@@ -20,6 +21,7 @@ const App = () => {
       <Route path={"/login"} element={<Login />} />
       <Route path={"/logout"} element={<Logout />} />
       <Route path={"/create"} element={<CreateTodo />} />
+      <Route path={"/update/:id"} element={<UpdateTodo />} />
     </Routes>
     </>
   )

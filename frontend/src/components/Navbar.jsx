@@ -1,12 +1,14 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../store/useContext";
 
 const Navbar = () => {
+  const {isLoggedIn,setIsLoggedIn} = useAuthContext();
+  
+
   const{authUser} = useAuthContext();
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 shadow-md">
         <div className="flex-1">
           <Link to={"/"} className="btn btn-ghost text-xl">
             Astro-Coder

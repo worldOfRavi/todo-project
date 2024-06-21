@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useCreateTodo from "../hooks/useCreateTodo";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import useGetOneTodo from "../hooks/useGetOneTodo";
 
-const CreateTodo = () => {
+const UpdateTodo = () => {
+    const {id} = useParams();
+    const {item,getOneTodo} = useGetOneTodo();
+
+    console.log(item);
+    useEffect(()=>{
+        getOneTodo(id);
+    },[])
   const navigate =  useNavigate();
 
    const {loading, create} =  useCreateTodo();
   const [input, setInput] = useState({
-    title: "",
-    description: "",
-    priority: "",
-    dueDate: "",
-    status: "",
+    title: item.title,
+    description: item.description,
+    priority: item.priority,
+    dueDate: item.dueDate,
+    status: item.status,
   });
 
   // function to handle the input change
@@ -33,7 +41,7 @@ const CreateTodo = () => {
 
   return (
     <>
-      <h1 className="text-gray-700 text-3xl text-center mt-10">Create New Task</h1>
+      <h1 className="text-gray-700 text-3xl text-center mt-10">Update Task</h1>
     <div className="create-container w-[80%] lg:max-w-[40%] md:max-w-[60%] sm:w-[50%] rounded-md border-2 shadow-sm r mx-auto mt-[4vh] p-2">
       <form className="flex flex-col gap-4 flex-wrap p-8 justify-center w-[100%] items-center" onSubmit={handleSubmit}>
         <label className="form-control w-full max-w-xs ">
@@ -111,7 +119,7 @@ const CreateTodo = () => {
         </select>
         <br />
         <button type="submit" className="btn w-full max-w-xs">
-          {loading ? <span className="loading loading-spinner"></span> : "Create"} 
+          update
         </button>
       </form>
     </div>
@@ -119,4 +127,7 @@ const CreateTodo = () => {
   );
 };
 
-export default CreateTodo;
+
+
+
+export default UpdateTodo
