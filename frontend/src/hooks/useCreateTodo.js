@@ -20,7 +20,7 @@ const useCreateTodo = () => {
         const data = await res.json();
         if(data.error) throw new Error(data.error);
         if(res.ok){
-            toast.success("Registration successfull");
+            toast.success("Todo creation successful");
         }
         else{
             toast.error(data.message)

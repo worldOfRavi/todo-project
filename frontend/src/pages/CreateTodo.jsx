@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import useCreateTodo from "../hooks/useCreateTodo";
+import { useNavigate } from "react-router-dom";
 
 const CreateTodo = () => {
+  const navigate =  useNavigate();
+
    const {loading, create} =  useCreateTodo();
   const [input, setInput] = useState({
     title: "",
@@ -23,7 +26,9 @@ const CreateTodo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    create(input)
+    create(input);
+    navigate("/");
+
   };
 
   return (
@@ -104,7 +109,7 @@ const CreateTodo = () => {
         </select>
         <br />
         <button type="submit" className="btn">
-          Create
+          {loading ? <span className="loading loading-spinner"></span> : "Create" }
         </button>
       </form>
     </div>

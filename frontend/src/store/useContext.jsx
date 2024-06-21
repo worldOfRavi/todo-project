@@ -4,7 +4,7 @@ export const authContext = createContext();
 
 export const AuthContextProvider = ({children})=>{
     const [authUser, setAuthUser] = useState("");
-    const [todoList, setTodoList] = useState([]);
+    const [todoList, setTodoList] = useState({});
 
     const storeINLS = (token)=>{
         setAuthUser(token);
@@ -17,8 +17,17 @@ export const AuthContextProvider = ({children})=>{
         return localStorage.removeItem('authToken');
     }
 
+    const getTodoList = async()=>{
+        const res = await fetch("http://localhost:3000/api/items");
+        const data = await res.json();
+        setTodoList(data.items)
+    }
+    useEffect(()=>{
+        getTodoList();
+    },[])
+
     return(
-        <authContext.Provider value={{authUser, setAuthUser, storeINLS,logoutUser,setTodoList,todoList}}>
+        <authContext.Provider value={{authUser, setAuthUser, storeINLS,logoutUser,todoList}}>
             {children}
         </authContext.Provider>
     )
